@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ATARIA | Premium ATAR Fragrances – Custom Branding & Manufacturing</title>
+    <!-- Tailwind CSS + Google Fonts + Font Awesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom override for smooth transitions & lazy load fade -->
+    <style>
+        /* custom scroll behavior, lazy image fade-in */
+        html {
+            scroll-behavior: smooth;
+        }
+        .lazy-img {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .lazy-img.loaded {
+            opacity: 1;
+        }
+        /* card hover effect */
+        .product-card {
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 30px -12px rgba(0, 0, 0, 0.2);
+        }
+        .whatsapp-hover:hover {
+            background-color: #075e54;
+            transition: all 0.2s;
+        }
+        .fragrance-bg {
+            background: radial-gradient(circle at 10% 20%, rgba(252, 234, 187, 0.2), rgba(211, 165, 130, 0.05));
+        }
+        ::selection {
+            background: #b87333;
+            color: #fff;
+        }
+    </style>
+    <!-- jQuery (for minor interactions + lazy loading helper) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- lazysizes optional but we implement manual lazy + jQuery custom -->
+</head>
+<body class="bg-amber-50 font-sans antialiased">
+
+    <!-- header / navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-amber-200">
+        <div class="container mx-auto px-5 md:px-8 py-4 flex flex-wrap items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-3xl font-bold bg-gradient-to-r from-amber-800 to-orange-600 bg-clip-text text-transparent">ATARIA</span>
+                <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2 py-1 rounded-full">Manufacturing Co.</span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                <a href="#home" class="hover:text-amber-700 transition">Home</a>
+                <a href="#fragrances" class="hover:text-amber-700 transition">Fragrances</a>
+                <a href="#catalog" class="hover:text-amber-700 transition">Catalog</a>
+                <a href="#custom" class="hover:text-amber-700 transition">Your Brand</a>
+                <a href="#contact" class="hover:text-amber-700 transition">Contact</a>
+            </nav>
+            <a href="#order" class="hidden md:inline-block bg-emerald-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-emerald-700 transition">Order via WhatsApp</a>
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-amber-800 focus:outline-none">☰</button>
+        </div>
+        <!-- mobile dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-t border-amber-100 flex flex-col space-y-3 px-5 py-4 shadow-lg">
+            <a href="#home" class="py-2 hover:text-amber-700">Home</a>
+            <a href="#fragrances" class="py-2 hover:text-amber-700">Fragrances</a>
+            <a href="#catalog" class="py-2 hover:text-amber-700">Catalog</a>
+            <a href="#custom" class="py-2 hover:text-amber-700">Your Brand</a>
+            <a href="#contact" class="py-2 hover:text-amber-700">Contact</a>
+            <a href="#order" class="bg-emerald-600 text-white text-center rounded-full py-2 mt-1">Order via WhatsApp</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero section with dynamic brand builder message -->
+        <section id="home" class="relative overflow-hidden bg-gradient-to-br from-amber-100 via-white to-orange-50 py-16 md:py-24">
+            <div class="container mx-auto px-5 md:px-8 text-center relative z-10">
+                <div class="max-2xl mx-auto">
+                    <span class="inline-block bg-amber-200 text-amber-900 text-sm font-semibold px-4 py-1 rounded-full mb-4">✨ Premium ATAR Manufacturer</span>
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight mb-5">Crafting <span class="text-amber-700">Luxury ATAR</span><br>For Your Brand Identity</h1>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">We produce 7 signature fragrances · 2 formats each · travel-friendly packaging. Add YOUR brand name – we manufacture, label & ship worldwide.</p>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <a href="#catalog" class="bg-amber-700 hover:bg-amber-800 text-white px-7 py-3 rounded-full font-semibold shadow-lg transition">Explore 14 Products</a>
+                        <a href="#custom" class="bg-white border border-amber-300 text-amber-800 px-7 py-3 rounded-full font-semibold shadow-sm hover:bg-amber-50 transition">Private Label →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-amber-50/50 to-transparent"></div>
+        </section>
+
+        <!-- Fragrance families & product grid: 7 scents * 2 variants = 14 items -->
+        <section id="fragrances" class="py-20 px-5">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Our ATAR Collection</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">7 inspiring fragrances — each available in <strong>Alcohol Spray (50ml)</strong> & <strong>Oil Roll-on (10ml)</strong>. Perfect for travel & daily elegance.</p>
+                    <div class="w-24 h-1 bg-amber-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <!-- Product grid dynamically rendered via jQuery (lazy loading images) -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 auto-rows-fr"></div>
+                
+                <!-- note: no pricing displayed exactly as requested, just product name, variant, type and buy via whatsapp -->
+                <div class="text-center mt-12">
+                    <a href="#order" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-3 rounded-full shadow-md transition">📦 Order Bulk / Samples via WhatsApp →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog structure explanation + packaging strategy -->
+        <section id="catalog" class="bg-white py-16 px-5 border-y border-amber-100">
+            <div class="container mx-auto">
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="lg:w-1/2">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">📦 14 SKU Product Catalog</h3>
+                        <p class="text-gray-600 mb-4">Each of the 7 ATAR blends is crafted in two premium variants: <strong>Alcohol-based spray</strong> (quick diffusion, fresh sillage) and <strong>Oil-based roll-on</strong> (long-lasting, skin-nourishing). Travel-friendly bottles: lightweight, leak-proof and elegant.</p>
+                        <ul class="space-y-2 text-gray-700 mb-6">
+                            <li class="flex items-start gap-2">✓ <span><strong>Packaging strategy:</strong> Eco-friendly carton + minimalist luxury design – fits any brand’s identity</span></li>
+                            <li class="flex items-start gap-2">✓ <span><strong>Recommended bottles:</strong> Frosted glass for roll-ons, sleek aluminum spray atomizers</span></li>
+                            <li class="flex items-start gap-2">✓ <span><strong>Custom Branding:</strong> We add YOUR logo, personalized label & outer box – MOQ friendly</span></li>
+                        </ul>
+                        <div class="bg-amber-50 p-4 rounded-2xl border-l-8 border-amber-500">
+                            <p class="font-semibold text-amber-900">✨ Brand positioning for Shopify / D2C: "Artisanal ATAR, modernized. Your name, our expertise."</p>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 grid grid-cols-2 gap-4">
+                        <img data-src="https://placehold.co/600x400/FFF3E0/B86B2E?text=Alcohol+Spray" class="lazy-img w-full rounded-xl shadow-md border border-amber-200" alt="spray mockup" width="300" height="200">
+                        <img data-src="https://placehold.co/600x400/FEF3C7/A0522D?text=Roll-on+Oil" class="lazy-img w-full rounded-xl shadow-md border border-amber-200" alt="roll on mockup" width="300" height="200">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- "Your Brand Name" section - custom manufacturing -->
+        <section id="custom" class="py-20 px-5 fragrance-bg">
+            <div class="container mx-auto max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-5">Add Your Brand Name, We Ship For You</h2>
+                <p class="text-lg text-gray-700 mb-8">You don't need to own a factory. Choose our ATAR formulations, pick your fragrances & variants, then we customize the packaging with <span class="font-bold text-amber-800">YOUR brand name & logo</span>. We fulfill orders directly to your customers (dropshipping) or bulk wholesale.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-6">
+                    <div class="bg-white/70 backdrop-blur-sm p-5 rounded-2xl shadow">🔖 <strong>Step 1:</strong> Select from 7 aromas / 14 SKUs</div>
+                    <div class="bg-white/70 backdrop-blur-sm p-5 rounded-2xl shadow">🏷️ <strong>Step 2:</strong> Provide brand assets – we design labels & packaging</div>
+                    <div class="bg-white/70 backdrop-blur-sm p-5 rounded-2xl shadow">🚚 <strong>Step 3:</strong> We manufacture, store & ship worldwide under your brand</div>
+                </div>
+                <div class="mt-10">
+                    <a href="#contact" class="inline-block bg-amber-700 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-amber-800 transition shadow">Start Your Private Label →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WhatsApp contact / order section (no pricing) -->
+        <section id="order" class="py-16 px-5 bg-emerald-50">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-3">Ready to order or customize?</h2>
+                <p class="text-gray-600 max-w-lg mx-auto mb-6">Click below to chat with our sales team on WhatsApp. Request catalog, discuss branding, MOQ, and shipping. No hidden pricing, just tailor-made solutions.</p>
+                <!-- dynamic whatsapp link - placeholder number, you can replace with actual business number -->
+                <a id="whatsapp-order-btn" href="https://wa.me/6281234567890?text=Hello%20ATARIA%2C%20I'm%20interested%20in%20your%20ATAR%20private%20label%20products.%20Please%20share%20details!" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-gray-900 font-bold px-7 py-4 rounded-2xl text-xl shadow-lg transition hover:bg-[#20b859] whatsapp-hover">
+                    <i class="fab fa-whatsapp text-2xl"></i> Order via WhatsApp Now
+                </a>
+                <p class="text-xs text-gray-500 mt-4">*We respond within 24 hours | MOQ flexible | sample orders available</p>
+            </div>
+        </section>
+
+        <!-- contact / footer -->
+        <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6">
+            <div class="container mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-2xl font-bold text-amber-400 mb-3">ATARIA</div>
+                    <p class="text-sm">Premium ATAR manufacturing & white-label solutions. Crafting tradition with modern travel formats.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
+                    <ul class="space-y-1 text-sm">
+                        <li><a href="#home" class="hover:text-amber-300">Home</a></li>
+                        <li><a href="#fragrances" class="hover:text-amber-300">Fragrance Collection</a></li>
+                        <li><a href="#custom" class="hover:text-amber-300">Private Label</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Contact & Support</h4>
+                    <p class="text-sm">✉️ hello@ataria.co (for brand partners)</p>
+                    <p class="text-sm">📞 +62 812 3456 7890 (WhatsApp only)</p>
+                    <div class="flex gap-3 mt-3">
+                        <a href="#" class="text-amber-400 text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-amber-400 text-xl"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-500 border-t border-gray-800 mt-8 pt-5">© 2025 ATARIA Manufacturing Co. — Your brand, our artisanal ATAR. All custom packaging & fulfillment.</div>
+        </footer>
+    </main>
+
+    <!-- fontawesome (for whatsapp icon & social) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>
+        $(document).ready(function() {
+            // ======================== PRODUCT DATA (7 fragrances * 2 variants) ====================
+            const fragranceNames = [
+                "Royal Oud & Amber", "Midnight Rose", "Saffron Velvet", "Coastal Vetiver", 
+                "Golden Musk", "Santal Mystic", "Citrus Zest Oud"
+            ];
+            
+            const variants = [
+                { type: "Alcohol Spray", format: "50ml Spray", icon: "💨", suffix: "spray" },
+                { type: "Oil Roll-on", format: "10ml Roll-on", icon: "💧", suffix: "rollon" }
+            ];
+            
+            // product list: 14 items
+            const products = [];
+            fragranceNames.forEach((fragrance, idx) => {
+                variants.forEach(variant => {
+                    products.push({
+                        id: `${fragrance.replace(/\s/g, '')}-${variant.suffix}`,
+                        fragrance: fragrance,
+                        variantType: variant.type,
+                        format: variant.format,
+                        icon: variant.icon,
+                        shortDesc: `Long-lasting ${variant.type === "Alcohol Spray" ? 'fresh spray' : 'oil-infused roll-on'} - Travel-friendly bottle`
+                    });
+                });
+            });
+            
+            // shuffle or maintain order: first all sprays then roll ons? But smarter: show each fragrance with two variants together
+            // We'll render in order as: for each fragrance -> spray first then roll-on -> makes clear pair
+            const orderedProducts = [];
+            fragranceNames.forEach(frag => {
+                const spray = products.find(p => p.fragrance === frag && p.variantType === "Alcohol Spray");
+                const rollon = products.find(p => p.fragrance === frag && p.variantType === "Oil Roll-on");
+                if(spray) orderedProducts.push(spray);
+                if(rollon) orderedProducts.push(rollon);
+            });
+            
+            const grid = $("#products-grid");
+            if(grid.length) {
+                grid.empty();
+                orderedProducts.forEach((prod, idx) => {
+                    // product card - no price shown, but show variant difference and buy whatsapp link per item
+                    const waMessage = `Hello ATARIA, I want to order *${prod.fragrance}* - ${prod.variantType} (${prod.format}) for my brand. Please share availability & customization options.`;
+                    const encodedMsg = encodeURIComponent(waMessage);
+                    const waHref = `https://wa.me/6281234567890?text=${encodedMsg}`;
+                    
+                    // image placeholder (lazy load) - we'll use placeholder images with fragrance name
+                    const imgSrcPlaceholder = `https://placehold.co/400x400/FDEBD0/B85C1A?text=${encodeURIComponent(prod.fragrance.slice(0,12))}+${prod.variantType==='Alcohol Spray'?'🔹Spray':'🟤Roll'}`;
+                    
+                    const card = $(`
+                        <div class="product-card bg-white rounded-2xl overflow-hidden shadow-md border border-amber-100 flex flex-col h-full transition-all">
+                            <div class="relative overflow-hidden bg-amber-50 h-56 flex items-center justify-center">
+                                <img class="lazy-img w-full h-full object-cover" data-src="${imgSrcPlaceholder}" alt="${prod.fragrance} ${prod.variantType}" width="300" height="260">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-xl text-gray-800">${prod.fragrance}</h3>
+                                    <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">${prod.icon}</span>
+                                </div>
+                                <div class="mt-1 flex flex-wrap gap-2">
+                                    <span class="text-sm font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">${prod.variantType}</span>
+                                    <span class="text-sm text-gray-500">${prod.format}</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mt-2 flex-grow">${prod.shortDesc} · Perfect for private label.</p>
+                                <div class="mt-4">
+                                    <a href="${waHref}" target="_blank" class="inline-flex items-center justify-center gap-1 w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-medium py-2 rounded-xl transition text-sm">
+                                        <i class="fab fa-whatsapp"></i> Order this
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                    grid.append(card);
+                });
+            }
+            
+            // -------- LAZY LOADING using jQuery + intersection observer fallback ---------
+            function lazyLoadImages() {
+                const lazyImgs = document.querySelectorAll('.lazy-img');
+                if ('IntersectionObserver' in window) {
+                    let observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                const src = img.getAttribute('data-src');
+                                if (src) {
+                                    img.src = src;
+                                    img.classList.add('loaded');
+                                    img.removeAttribute('data-src');
+                                }
+                                observer.unobserve(img);
+                            }
+                        });
+                    }, { rootMargin: "100px", threshold: 0.1 });
+                    lazyImgs.forEach(img => observer.observe(img));
+                } else {
+                    // fallback: load all images without delay
+                    lazyImgs.forEach(img => {
+                        const src = img.getAttribute('data-src');
+                        if (src) {
+                            img.src = src;
+                            img.classList.add('loaded');
+                            img.removeAttribute('data-src');
+                        }
+                    });
+                }
+            }
+            
+            // Also manually handle any dynamically added images - after product render, call lazy
+            // Since we've appended product cards, we must re-run lazy observer on new .lazy-img
+            setTimeout(() => {
+                lazyLoadImages();
+            }, 100);
+            
+            // on scroll and load, ensure lazyload triggers (but observer covers)
+            $(window).on('load scroll resize', function() {
+                lazyLoadImages(); // safe to call again for newly shown ones (observer won't duplicate)
+            });
+            
+            // Mobile menu toggle
+            $("#mobile-menu-btn").on("click", function() {
+                $("#mobile-menu").toggleClass("hidden");
+            });
+            
+            // close mobile menu after clicking link
+            $("#mobile-menu a").on("click", function() {
+                $("#mobile-menu").addClass("hidden");
+            });
+            
+            // Smooth anchor offset for sticky header
+            $('a[href^="#"]').on('click', function(e) {
+                let target = $(this.getAttribute('href'));
+                if (target.length) {
+                    e.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 500);
+                    // update url hash without jumping wild (optional)
+                    if(history.pushState) history.pushState(null, null, this.getAttribute('href'));
+                }
+            });
+            
+            // Preload product hero feel: change whatsapp global link (ensure same number used across all)
+            // Our default wa link base is set with placeholder number, you can replace in multiple spots
+            // For simplicity, we edit default global order button href (by id)
+            const baseNumber = "6281234567890";  // placeholder number – company can replace real one
+            $("#whatsapp-order-btn").attr("href", `https://wa.me/${baseNumber}?text=Hello%20ATARIA%2C%20I'm%20interested%20in%20private%20label%20ATAR%20collection%20and%20bulk%20ordering.%20Please%20guide%20me.`);
+            // Also any other dynamic buttons? we already set inside product cards, but if needed we update each product card's wa link consistency. Actually we inserted with correct number 👍
+            // Fix all dynamic wa links also if we want same number: updated above product loop already uses 6281234567890. Good.
+        });
+    </script>
+    <!-- Add fallback for lazy images that weren't triggered -->
+    <noscript>
+        <style>.lazy-img { opacity: 1; } .lazy-img[data-src] { content: attr(data-src); }</style>
+    </noscript>
+</body>
+</html>
